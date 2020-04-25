@@ -6,7 +6,6 @@
 --
 CREATE DATABASE IF NOT EXISTS DocOffice;
 USE DocOffice;
-
 --
 -- Definition of table 'Person`
 --
@@ -79,7 +78,8 @@ CREATE TABLE PatientVisit (
   DocNote	varchar(2000),
   PRIMARY KEY (VisitID),
   FOREIGN KEY (PatientID) references Patient(PatientID),
-  FOREIGN KEY (DoctorID) references Doctor(DoctorID)
+  FOREIGN KEY (DoctorID) references Doctor(DoctorID),
+  CONSTRAINT CHK_PatientVisit CHECK (PatientID != DoctorID)
 );
 --
 -- Definition of table `Test`
@@ -162,7 +162,7 @@ INSERT INTO Person VALUES ('666666609','Helga','Pataki','101 Holyoke St','Dallas
 INSERT INTO Person VALUES ('666666610','Naveen','Drew','198 Elm St','Philadelphia','PA','56219','3742938282',NULL); 
 INSERT INTO Person VALUES ('666666611','Carl','Reedy','213 Ball St','Philadelphia','PA','56219','3746666888',NULL); 
 INSERT INTO Person VALUES ('666666612','Sammy','Hall','433 Main Street','Miami', 'FL','41390','3746655658',NULL); 
-INSERT INTO Person VALUES ('666666613','Red','Bacher','196 Elm Street','Miami', 'FL','41390','3749494837',NULL); 
+INSERT INTO Person VALUES ('666666613','Robert','Stevens','196 Elm Street','Miami', 'FL','41390','3749494837',NULL); 
 
 
 INSERT INTO Doctor VALUES ('JO5847226','MD, MM','333445555');
@@ -375,7 +375,7 @@ INSERT INTO Prescription VALUES ('rx91508690034987','Simvastatin');
 INSERT INTO Prescription VALUES ('rx99908691034987','Sinemet'); 
 INSERT INTO Prescription VALUES ('rx67808690224987','Tramadol'); 
 INSERT INTO Prescription VALUES ('rx94308690034987','Trazadone'); 
-INSERT INTO Prescription VALUES ('rx16908690034987','Viagra'); 
+INSERT INTO Prescription VALUES ('rx16908690034987','Vicodin'); 
 INSERT INTO Prescription VALUES ('rx12343090034987','Wellbutrin'); 
 INSERT INTO Prescription VALUES ('rx12312943777787','Xanax'); 
 INSERT INTO Prescription VALUES ('rx09384086923487','Zoloft'); 
