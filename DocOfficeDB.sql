@@ -11,7 +11,7 @@ USE DocOffice;
 --
 DROP TABLE IF EXISTS Person;
 CREATE TABLE Person (
-  PersonID	varchar(9),
+  PersonID	int AUTO_INCREMENT,
   FirstName	varchar(25) NOT NULL,
   LastName	varchar(25),
   StreetAddress	varchar(50),	
@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS Doctor;
 CREATE TABLE Doctor (
   DoctorID	varchar(9),
   MedicalDegrees	char(50),
-  PersonID	varchar(9), 
+  PersonID	int, 
   PRIMARY KEY (DoctorID),
   FOREIGN KEY (PersonID) references Person(PersonID)
 );
@@ -82,7 +82,7 @@ CREATE TABLE Patient (
   PhoneNumber	varchar(15),
   PhoneNumExt	char(10),
   DOB	date,
-  PersonID    varchar(9),
+  PersonID    int,
   PRIMARY KEY (PatientID),
   FOREIGN KEY (PersonID) references Person(PersonID)
 );
@@ -155,56 +155,56 @@ CREATE TABLE DocSpecialtyAudit (
 );
 
 -- Insert all records 
-INSERT INTO Person VALUES ('666666600','Bob','Bender','8794 Garfield', 'Chicago', 'IL','45321','7148657326',NULL);
-INSERT INTO Person VALUES ('333333300','Kim','Grace','6677 Mills Ave', 'Sacramento', 'CA','60078','3748372614',NULL);
-INSERT INTO Person VALUES ('888665555','James','Borg','450 Stone', 'Houston', 'TX','92867','3748372342',NULL);
-INSERT INTO Person VALUES ('444444400','Alex','Freed','4333 Pillsbury', 'Milwaukee', 'WI','72954','3748372019',NULL);
-INSERT INTO Person VALUES ('222222200','Evan','Wallis','134 Pelham', 'Milwaukee', 'WI','72954','3748374859',NULL);
-INSERT INTO Person VALUES ('111111100','Jared','James','123 Peachtree', 'Atlanta', 'GA','89324','3748379876',NULL);
-INSERT INTO Person VALUES ('555555500','John','James','7676 Bloomington', 'Sacramento', 'CA','60078','3748370912',NULL);
-INSERT INTO Person VALUES ('222222202','Andy','Vile','1967 Jordan', 'Milwaukee', 'WI','72954','3748372392',NULL);
-INSERT INTO Person VALUES ('111111103','Brad','Knight','176 Main St.', 'Atlanta', 'GA','89324','3748310293',NULL); 
-INSERT INTO Person VALUES ('222222201','Josh','Zell','266 McGrady', 'Milwaukee', 'WI','72954','3748398765',NULL); 
-INSERT INTO Person VALUES ('111111102','Justin','Mark','2342 May', 'Atlanta', 'GA','89324','3748091856',NULL);
-INSERT INTO Person VALUES ('111111101','Jon','Jones','111 Allgood', 'Atlanta', 'GA','89324','7142388273',NULL); 
-INSERT INTO Person VALUES ('987987987','Ahmad','Jabbar','980 Dallas', 'Houston', 'TX','92867','3395832342',NULL); 
-INSERT INTO Person VALUES ('453453453','Joyce','English','5631 Rice', 'Houston', 'TX','92867','7600928114',NULL); 
-INSERT INTO Person VALUES ('666884444','Ramesh','Narayan','971 Fire Oak', 'Humble', 'TX','92734','7148182857',NULL); 
-INSERT INTO Person VALUES ('999887777','Alicia','Zelaya','3321 Castle', 'Spring', 'TX','92765','7141236357',NULL); 
-INSERT INTO Person VALUES ('123456789','John','Smith','731 Fondren', 'Houston', 'TX','92867','7148372905',NULL); 
-INSERT INTO Person VALUES ('987654321','Jennifer','Wallace','291 Berry', 'Bellaire', 'TX','92725','3395832342',NULL); 
-INSERT INTO Person VALUES ('333445555','Franklin','Wong','638 Voss', 'Houston', 'TX','92867','9485768293',NULL);
-INSERT INTO Person VALUES ('222222203','Tom','Brand','112 Third St', 'Milwaukee', 'WI','72954','222222203',NULL); 
-INSERT INTO Person VALUES ('222222204','Jenny','Vos','263 Mayberry', 'Milwaukee', 'WI','72954','7148271928',NULL); 
-INSERT INTO Person VALUES ('222222205','Chris','Carter','565 Jordan', 'Milwaukee', 'WI','72954','7141014211',NULL); 
-INSERT INTO Person VALUES ('333333301','Jeff','Chase','145 Bradbury', 'Sacramento', 'CA','60078','3748371111','678'); 
-INSERT INTO Person VALUES ('444444401','Bonnie','Bays','111 Hollow', 'Milwaukee', 'WI','72954','3748322222','432'); 
-INSERT INTO Person VALUES ('444444402','Alec','Best','233 Solid', 'Milwaukee', 'WI','72954','3743333456','123'); 
-INSERT INTO Person VALUES ('444444403','Sam','Snedden','987 Windy St', 'Milwaukee', 'WI','72954','7148123456','4567'); 
-INSERT INTO Person VALUES ('555555501','Nandita','Ball','222 Howard', 'Sacramento', 'CA','60078','7142132311','78'); 
-INSERT INTO Person VALUES ('666666601','Jill','Jarvis','6234 Lincoln', 'Chicago', 'IL','45321','3740293888','984'); 
-INSERT INTO Person VALUES ('666666602','Kate','King','1976 Boone Trace', 'Chicago', 'IL','45321','3748333333','094'); 
-INSERT INTO Person VALUES ('666666603','Lyle','Leslie','417 Hancock Ave', 'Chicago', 'IL','45321','3748444444','123'); 
-INSERT INTO Person VALUES ('666666604','Billie','King','556 Washington', 'Chicago', 'IL','45321','3748555555','674'); 
-INSERT INTO Person VALUES ('666666605','Jon','Kramer','1988 Windy Creek', 'Seattle', 'WA','92740','3746948477',NULL);
-INSERT INTO Person VALUES ('666666606','Ray','King','213 Delk Road', 'Seattle', 'WA','92704','7140920004',NULL);
-INSERT INTO Person VALUES ('666666607','Gerald','Small','122 Ball Street','Dallas','TX','92869','7143353422',NULL); 
-INSERT INTO Person VALUES ('666666608','Arnold','Head','233 Spring St','Dallas','TX','92869','9481232299',NULL);
-INSERT INTO Person VALUES ('666666609','Helga','Pataki','101 Holyoke St','Dallas','TX','92869','3748301010',NULL); 
-INSERT INTO Person VALUES ('666666610','Naveen','Drew','198 Elm St','Philadelphia','PA','56219','3742938282',NULL); 
-INSERT INTO Person VALUES ('666666611','Carl','Reedy','213 Ball St','Philadelphia','PA','56219','3746666888',NULL); 
-INSERT INTO Person VALUES ('666666612','Sammy','Hall','433 Main Street','Miami', 'FL','41390','3746655658',NULL); 
-INSERT INTO Person VALUES ('666666613','Robert','Stevens','196 Elm Street','Miami', 'FL','41390','3749494837',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Bob','Bender','8794 Garfield', 'Chicago', 'IL','45321','7148657326',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Kim','Grace','6677 Mills Ave', 'Sacramento', 'CA','60078','3748372614',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('James','Borg','450 Stone', 'Houston', 'TX','92867','3748372342',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Alex','Freed','4333 Pillsbury', 'Milwaukee', 'WI','72954','3748372019',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Evan','Wallis','134 Pelham', 'Milwaukee', 'WI','72954','3748374859',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Jared','James','123 Peachtree', 'Atlanta', 'GA','89324','3748379876',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('John','James','7676 Bloomington', 'Sacramento', 'CA','60078','3748370912',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Andy','Vile','1967 Jordan', 'Milwaukee', 'WI','72954','3748372392',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Brad','Knight','176 Main St.', 'Atlanta', 'GA','89324','3748310293',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Josh','Zell','266 McGrady', 'Milwaukee', 'WI','72954','3748398765',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Justin','Mark','2342 May', 'Atlanta', 'GA','89324','3748091856',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Jon','Jones','111 Allgood', 'Atlanta', 'GA','89324','7142388273',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Ahmad','Jabbar','980 Dallas', 'Houston', 'TX','92867','3395832342',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Joyce','English','5631 Rice', 'Houston', 'TX','92867','7600928114',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Ramesh','Narayan','971 Fire Oak', 'Humble', 'TX','92734','7148182857',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Alicia','Zelaya','3321 Castle', 'Spring', 'TX','92765','7141236357',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('John','Smith','731 Fondren', 'Houston', 'TX','92867','7148372905',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Jennifer','Wallace','291 Berry', 'Bellaire', 'TX','92725','3395832342',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Franklin','Wong','638 Voss', 'Houston', 'TX','92867','9485768293',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Tom','Brand','112 Third St', 'Milwaukee', 'WI','72954','7147711656',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Jenny','Vos','263 Mayberry', 'Milwaukee', 'WI','72954','7148271928',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Chris','Carter','565 Jordan', 'Milwaukee', 'WI','72954','7141014211',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Jeff','Chase','145 Bradbury', 'Sacramento', 'CA','60078','3748371111','678'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Bonnie','Bays','111 Hollow', 'Milwaukee', 'WI','72954','374832','432'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Alec','Best','233 Solid', 'Milwaukee', 'WI','72954','3743333456','123'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Sam','Snedden','987 Windy St', 'Milwaukee', 'WI','72954','7148123456','4567'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Nandita','Ball','222 Howard', 'Sacramento', 'CA','60078','7142132311','78'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Jill','Jarvis','6234 Lincoln', 'Chicago', 'IL','45321','3740293888','984'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Kate','King','1976 Boone Trace', 'Chicago', 'IL','45321','3748333333','094'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Lyle','Leslie','417 Hancock Ave', 'Chicago', 'IL','45321','3748444444','123'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Billie','King','556 Washington', 'Chicago', 'IL','45321','3748555555','674'); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Jon','Kramer','1988 Windy Creek', 'Seattle', 'WA','92740','3746948477',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Ray','King','213 Delk Road', 'Seattle', 'WA','92704','7140920004',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Gerald','Small','122 Ball Street','Dallas','TX','92869','7143353422',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Arnold','Head','233 Spring St','Dallas','TX','92869','9481232299',NULL);
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Helga','Pataki','101 Holyoke St','Dallas','TX','92869','3748301010',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Naveen','Drew','198 Elm St','Philadelphia','PA','56219','3742938282',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Carl','Reedy','213 Ball St','Philadelphia','PA','56219','3746666888',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Sammy','Hall','433 Main Street','Miami', 'FL','41390','3746655658',NULL); 
+INSERT INTO Person(FirstName,LastName,StreetAddress,City,State,Zipcode,PhoneNumber,PhoneNumExt) VALUES ('Robert','Stevens','196 Elm Street','Miami', 'FL','41390','3749494837',NULL); 
 
 
-INSERT INTO Doctor VALUES ('FR5847226','MD, MM','333445555');
-INSERT INTO Doctor VALUES ('JE1029384','MD, MS, DS','987654321');
-INSERT INTO Doctor VALUES ('JA9584732','MD, DS, DCM','888665555');
-INSERT INTO Doctor VALUES ('JA6748392','MD, DO','111111100');
-INSERT INTO Doctor VALUES ('AL0987736','MD, MCM','444444400');
-INSERT INTO Doctor VALUES ('JO3459681','MD','555555500');
-INSERT INTO Doctor VALUES ('SA6699912','MD, DS','666666612'); 
-INSERT INTO Doctor VALUES ('RO1666613','MD, DCM','666666613'); 
+INSERT INTO Doctor VALUES ('FR5847226','MD, MM','19');
+INSERT INTO Doctor VALUES ('JE1029384','MD, MS, DS','18');
+INSERT INTO Doctor VALUES ('JA9584732','MD, DS, DCM','3');
+INSERT INTO Doctor VALUES ('JA6748392','MD, DO','6');
+INSERT INTO Doctor VALUES ('AL0987736','MD, MCM','4');
+INSERT INTO Doctor VALUES ('JO3459681','MD','7');
+INSERT INTO Doctor VALUES ('SA6699912','MD, DS','39'); 
+INSERT INTO Doctor VALUES ('RO1666613','MD, DCM','40'); 
 
 INSERT INTO Specialty VALUES ('CLI00','Clinical Medicine');
 INSERT INTO Specialty VALUES ('FAM00','Family Medicine');
@@ -220,46 +220,46 @@ INSERT INTO DoctorSpecialty VALUES ('JO3459681','FAM00');
 INSERT INTO DoctorSpecialty VALUES ('SA6699912','SUR00'); 
 INSERT INTO DoctorSpecialty VALUES ('RO1666613','FAM00'); 
 
-INSERT INTO Patient VALUES ('PA666600','7148657326',NULL,'1968-04-17','666666600');
-INSERT INTO Patient VALUES ('PA333300','3748372614',NULL,'1970-10-23','333333300'); 
-INSERT INTO Patient VALUES ('PA665555','3748372342',NULL,'1927-11-10','888665555'); 
-INSERT INTO Patient VALUES ('PA444400','3748372019',NULL,'1950-10-09','444444400'); 
-INSERT INTO Patient VALUES ('PA222200','3748374859',NULL,'1958-01-16','222222200'); 
-INSERT INTO Patient VALUES ('PA111100','3748379876',NULL,'1966-10-10','111111100'); 
-INSERT INTO Patient VALUES ('PA555500','3748370912',NULL,'1975-06-30','555555500'); 
-INSERT INTO Patient VALUES ('PA222202','3748372392',NULL,'1944-06-21','222222202'); 
-INSERT INTO Patient VALUES ('PA111103','3748310293',NULL,'1968-02-13','111111103'); 
-INSERT INTO Patient VALUES ('PA222201','3748398765',NULL,'1954-05-22','222222201'); 
-INSERT INTO Patient VALUES ('PA111102','3748091856',NULL,'1966-01-12','111111102'); 
-INSERT INTO Patient VALUES ('PA111101','7142388273',NULL,'1967-11-14','111111101'); 
-INSERT INTO Patient VALUES ('PA987987','7608323614',NULL,'1959-03-29','987987987'); 
-INSERT INTO Patient VALUES ('PA453453','7600928114',NULL,'1962-07-31','453453453'); 
-INSERT INTO Patient VALUES ('PA884444','7148182857',NULL,'1952-09-15','666884444'); 
-INSERT INTO Patient VALUES ('PA887777','7141236357',NULL,'1958-07-19','999887777'); 
-INSERT INTO Patient VALUES ('PA456789','7148372905',NULL,'1955-01-09','123456789'); 
-INSERT INTO Patient VALUES ('PA654321','3395832342',NULL,'1931-06-20','987654321'); 
-INSERT INTO Patient VALUES ('PA445555','9485768293',NULL,'1945-12-08','333445555'); 
-INSERT INTO Patient VALUES ('PA222203','9487829301','45','1966-12-16','222222203'); 
-INSERT INTO Patient VALUES ('PA222204','7148271928','6753','1967-11-11','222222204'); 
-INSERT INTO Patient VALUES ('PA222205','7141014211','7895','1960-03-21','222222205'); 
-INSERT INTO Patient VALUES ('PA333301','3748371111','678','1970-01-07','333333301'); 
-INSERT INTO Patient VALUES ('PA444401','3748322222','432','1956-06-19','444444401'); 
-INSERT INTO Patient VALUES ('PA444402','3743333456','123','1966-06-18','444444402'); 
-INSERT INTO Patient VALUES ('PA444403','7148123456','4567','1977-07-31','444444403'); 
-INSERT INTO Patient VALUES ('PA555501','7142132311','78','1969-04-16','555555501'); 
-INSERT INTO Patient VALUES ('PA666601','3740293888','984','1966-01-14','666666601'); 
-INSERT INTO Patient VALUES ('PA666602','3748333333','094','1966-04-16','666666602'); 
-INSERT INTO Patient VALUES ('PA666603','3748444444','123','1963-06-09','666666603'); 
-INSERT INTO Patient VALUES ('PA666604','3748555555','674','1960-01-01','666666604'); 
-INSERT INTO Patient VALUES ('PA666605','3746948477',NULL,'1964-08-22','666666605'); 
-INSERT INTO Patient VALUES ('PA666606','7140920004',NULL,'1949-08-16','666666606'); 
-INSERT INTO Patient VALUES ('PA666607','7143353422',NULL,'1962-05-15','666666607'); 
-INSERT INTO Patient VALUES ('PA666608','9481232299',NULL,'1967-05-19','666666608'); 
-INSERT INTO Patient VALUES ('PA666609','3748301010',NULL,'1969-03-11','666666609'); 
-INSERT INTO Patient VALUES ('PA666610','3742938282',NULL,'1970-05-23','666666610'); 
-INSERT INTO Patient VALUES ('PA666611','3746666888',NULL,'1977-06-21','666666611'); 
-INSERT INTO Patient VALUES ('PA666612','3746655658',NULL,'1970-01-11','666666612'); 
-INSERT INTO Patient VALUES ('PA666613','3749494837',NULL,'1980-05-21','666666613'); 
+INSERT INTO Patient VALUES ('PA666600','7148657326',NULL,'1968-04-17','1');
+INSERT INTO Patient VALUES ('PA333300','3748372614',NULL,'1970-10-23','2'); 
+INSERT INTO Patient VALUES ('PA665555','3748372342',NULL,'1927-11-10','3'); 
+INSERT INTO Patient VALUES ('PA444400','3748372019',NULL,'1950-10-09','4'); 
+INSERT INTO Patient VALUES ('PA222200','3748374859',NULL,'1958-01-16','5'); 
+INSERT INTO Patient VALUES ('PA111100','3748379876',NULL,'1966-10-10','6'); 
+INSERT INTO Patient VALUES ('PA555500','3748370912',NULL,'1975-06-30','7'); 
+INSERT INTO Patient VALUES ('PA222202','3748372392',NULL,'1944-06-21','8'); 
+INSERT INTO Patient VALUES ('PA111103','3748310293',NULL,'1968-02-13','9'); 
+INSERT INTO Patient VALUES ('PA222201','3748398765',NULL,'1954-05-22','10'); 
+INSERT INTO Patient VALUES ('PA111102','3748091856',NULL,'1966-01-12','11'); 
+INSERT INTO Patient VALUES ('PA111101','7142388273',NULL,'1967-11-14','12'); 
+INSERT INTO Patient VALUES ('PA987987','7608323614',NULL,'1959-03-29','13'); 
+INSERT INTO Patient VALUES ('PA453453','7600928114',NULL,'1962-07-31','14'); 
+INSERT INTO Patient VALUES ('PA884444','7148182857',NULL,'1952-09-15','15'); 
+INSERT INTO Patient VALUES ('PA887777','7141236357',NULL,'1958-07-19','16'); 
+INSERT INTO Patient VALUES ('PA456789','7148372905',NULL,'1955-01-09','17'); 
+INSERT INTO Patient VALUES ('PA654321','3395832342',NULL,'1931-06-20','18'); 
+INSERT INTO Patient VALUES ('PA445555','9485768293',NULL,'1945-12-08','19'); 
+INSERT INTO Patient VALUES ('PA222203','9487829301','45','1966-12-16','20'); 
+INSERT INTO Patient VALUES ('PA222204','7148271928','6753','1967-11-11','21'); 
+INSERT INTO Patient VALUES ('PA222205','7141014211','7895','1960-03-21','22'); 
+INSERT INTO Patient VALUES ('PA333301','3748371111','678','1970-01-07','23'); 
+INSERT INTO Patient VALUES ('PA444401','3748322222','432','1956-06-19','24'); 
+INSERT INTO Patient VALUES ('PA444402','3743333456','123','1966-06-18','25'); 
+INSERT INTO Patient VALUES ('PA444403','7148123456','4567','1977-07-31','26'); 
+INSERT INTO Patient VALUES ('PA555501','7142132311','78','1969-04-16','27'); 
+INSERT INTO Patient VALUES ('PA666601','3740293888','984','1966-01-14','28'); 
+INSERT INTO Patient VALUES ('PA666602','3748333333','094','1966-04-16','29'); 
+INSERT INTO Patient VALUES ('PA666603','3748444444','123','1963-06-09','30'); 
+INSERT INTO Patient VALUES ('PA666604','3748555555','674','1960-01-01','31'); 
+INSERT INTO Patient VALUES ('PA666605','3746948477',NULL,'1964-08-22','32'); 
+INSERT INTO Patient VALUES ('PA666606','7140920004',NULL,'1949-08-16','33'); 
+INSERT INTO Patient VALUES ('PA666607','7143353422',NULL,'1962-05-15','34'); 
+INSERT INTO Patient VALUES ('PA666608','9481232299',NULL,'1967-05-19','35'); 
+INSERT INTO Patient VALUES ('PA666609','3748301010',NULL,'1969-03-11','36'); 
+INSERT INTO Patient VALUES ('PA666610','3742938282',NULL,'1970-05-23','37'); 
+INSERT INTO Patient VALUES ('PA666611','3746666888',NULL,'1977-06-21','38'); 
+INSERT INTO Patient VALUES ('PA666612','3746655658',NULL,'1970-01-11','39'); 
+INSERT INTO Patient VALUES ('PA666613','3749494837',NULL,'1980-05-21','40'); 
 
 
 INSERT INTO PatientVisit VALUES ('PV0000001','PA666600','FR5847226','2019-01-01','09:00:00','trouble breathing, feeling depressed because of quarantine loneliness, difficulty breathing may be anxiety induced, no apparent abnormalities present when listening to breathing with stethoscope');
