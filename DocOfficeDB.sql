@@ -179,7 +179,7 @@ PrescriptionID="rx16908690034987";
 -- shows First, Last name, and phone number of Doctor Robert Steven's patients
 --
 CREATE VIEW DocStevens AS
-SELECT DISTINCT FirstName, LastName, Patient.PhoneNumber
+SELECT DISTINCT FirstName, LastName, Patient.PhoneNumber, Patient.PhoneNumExt
 FROM Person, PatientVisit, Patient
 WHERE 
 PatientVisit.DoctorID="RO1666613" AND
@@ -242,8 +242,7 @@ INSERT INTO Specialty VALUES ('FAM00','Family Medicine');
 INSERT INTO Specialty VALUES ('OST00','Osteopathic Medicine');
 INSERT INTO Specialty VALUES ('SUR00','Surgery');
 
-INSERT INTO DoctorSpecialty VALUES ('FR5847226','FAM00');
-INSERT INTO DoctorSpecialty VALUES ('JE1029384','SUR00');
+
 INSERT INTO DoctorSpecialty VALUES ('JA9584732','SUR00');
 INSERT INTO DoctorSpecialty VALUES ('JA6748392','OST00');
 INSERT INTO DoctorSpecialty VALUES ('AL0987736','CLI00');
