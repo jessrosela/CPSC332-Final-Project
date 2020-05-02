@@ -160,7 +160,8 @@ CREATE TABLE DocSpecialtyAudit (
 CREATE VIEW DocSpecialty AS
 SELECT FirstName, LastName, SpecialtyID
 FROM Person, DoctorSpecialty, Doctor
-WHERE Doctor.PersonID=Person.PersonID;
+WHERE DoctorSpecialty.DoctorID=Doctor.DoctorID AND
+Doctor.PersonID=Person.PersonID;
 --
 -- Definition of view `DocVicodin`
 -- shows First and Last name of Doctors who prescribed Vicodin
