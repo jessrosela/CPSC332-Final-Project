@@ -11,7 +11,7 @@ USE DocOffice;
 --
 DROP TABLE IF EXISTS Person;
 CREATE TABLE Person (
-  PersonID	int AUTO_INCREMENT,
+  PersonID	varchar(9),
   FirstName	varchar(25) NOT NULL,
   LastName	varchar(25),
   StreetAddress	varchar(50),	
@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS Doctor;
 CREATE TABLE Doctor (
   DoctorID	varchar(9),
   MedicalDegrees	char(50),
-  PersonID int, 
+  PersonID varchar(9),
   PRIMARY KEY (DoctorID),
   FOREIGN KEY (PersonID) references Person(PersonID)
 );
@@ -82,7 +82,7 @@ CREATE TABLE Patient (
   PhoneNumber	varchar(15),
   PhoneNumExt	char(10),
   DOB	date,
-  PersonID    int,
+  PersonID    varchar(9),
   PRIMARY KEY (PatientID),
   FOREIGN KEY (PersonID) references Person(PersonID)
 );
@@ -153,12 +153,18 @@ CREATE TABLE DocSpecialtyAudit (
   FOREIGN KEY (FirstName) references Person(FirstName),
   FOREIGN KEY (SpecialtyID) references Specialty(SpecialtyID)
 );
-
+--
+-- Definition of view `DocSpecialty`
+-- shows First, Last name, and SpecialtyID of all doctors
+--
 CREATE VIEW DocSpecialty AS
 SELECT FirstName, LastName, SpecialtyID
 FROM Person, DoctorSpecialty, Doctor
 WHERE Doctor.PersonID=Person.PersonID;
-
+--
+-- Definition of view `DocVicodin`
+-- shows First and Last name of Doctors who prescribed Vicodin
+--
 CREATE VIEW DocVicodin AS
 SELECT FirstName, LastName
 FROM Person, Doctor, PatientVisit, PVisitPrescription
