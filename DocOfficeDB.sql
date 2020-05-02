@@ -173,6 +173,17 @@ Doctor.PersonID=Person.PersonID AND
 Doctor.DoctorID=PatientVisit.DoctorID AND
 PatientVisit.VisitID=PVisitPrescription.VisitID AND
 PrescriptionID="rx16908690034987";
+--
+-- Definition of view `DocStevens`
+-- shows First, Last name, and phone number of Doctor Robert Steven's patients
+--
+CREATE VIEW DocStevens AS
+SELECT DISTINCT FirstName, LastName, Patient.PhoneNumber
+FROM Person, PatientVisit, Patient
+WHERE 
+PatientVisit.DoctorID="RO1666613" AND
+PatientVisit.PatientID=Patient.PatientID AND
+Patient.PersonID=Person.PersonID;
 
 -- Insert all records 
 INSERT INTO Person VALUES ('666666600','Bob','Bender','8794 Garfield', 'Chicago', 'IL','45321','7148657326',NULL);
