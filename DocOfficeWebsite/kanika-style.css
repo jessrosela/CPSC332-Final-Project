@@ -1,0 +1,25 @@
+.text3{
+	
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	text-align:left;
+	color:#000000;
+	font-weight:bold;
+	text-align:justify;
+	line-height:11pt;
+	}
+.style1 {
+font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; text-align: left; color: #0000FF; font-weight: bold; text-align: justify; line-height: 11pt; }
+a
+{
+color:#000000;
+text-decoration:none;
+}
+
+a:hover
+{
+color:#000099;
+text-decoration:underline;
+}
+
+
