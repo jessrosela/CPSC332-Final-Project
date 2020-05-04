@@ -91,7 +91,7 @@ CREATE TABLE Patient (
 --
 DROP TABLE IF EXISTS PatientVisit;
 CREATE TABLE PatientVisit (
-  VisitID	varchar(12),
+  VisitID	varchar(9),
   PatientID	varchar(8),
   DoctorID	varchar(9),
   VisitDate	date,
@@ -162,6 +162,19 @@ SELECT FirstName, LastName, SpecialtyID
 FROM Person, DoctorSpecialty, Doctor
 WHERE DoctorSpecialty.DoctorID=Doctor.DoctorID AND
 Doctor.PersonID=Person.PersonID;
+--
+-- Definition of view `DocSpecialtyNULL`
+-- shows First, Last Name and SpecialtyID's of Doctors
+-- includes First and Last Names of Doctors without specialties
+--
+CREATE VIEW DocSpecialtyNULL AS
+SELECT FirstName, LastName, v.SpecialtyID
+FROM Person, (
+SELECT SpecialtyID, Doctor.PersonID
+FROM DoctorSpecialty
+RIGHT JOIN Doctor
+ON Doctor.DoctorID=DoctorSpecialty.DoctorID) as v
+WHERE v.PersonID=Person.PersonID;
 --
 -- Definition of view `DocVicodin`
 -- shows First and Last name of Doctors who prescribed Vicodin
