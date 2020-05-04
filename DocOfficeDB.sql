@@ -56,6 +56,7 @@ CREATE TABLE DoctorSpecialty (
 --
 -- Definition of trigger before insert `DoctorSpecialty`
 --
+DROP TRIGGER IF EXISTS TRIG_DoctorSpecialty_INSERT;
 CREATE TRIGGER TRIG_DoctorSpecialty_INSERT
 BEFORE INSERT ON DoctorSpecialty
   FOR EACH ROW 
@@ -66,6 +67,7 @@ BEFORE INSERT ON DoctorSpecialty
 --
 -- Definition of trigger before update `DoctorSpecialty`
 --     
+DROP TRIGGER IF EXISTS TRIG_DoctorSpecialty_UPDATE;
 CREATE TRIGGER TRIG_DoctorSpecialty_UPDATE
 BEFORE UPDATE ON DoctorSpecialty
   FOR EACH ROW 
@@ -157,6 +159,7 @@ CREATE TABLE DocSpecialtyAudit (
 -- Definition of view `DocSpecialty`
 -- shows First, Last name, and SpecialtyID of all doctors
 --
+DROP VIEW IF EXISTS DocSpecialty;
 CREATE VIEW DocSpecialty AS
 SELECT FirstName, LastName, SpecialtyID
 FROM Person, DoctorSpecialty, Doctor
@@ -167,6 +170,7 @@ Doctor.PersonID=Person.PersonID;
 -- shows First, Last Name and SpecialtyID's of Doctors
 -- includes First and Last Names of Doctors without specialties
 --
+DROP VIEW IF EXISTS DocSpecialtyNULL;
 CREATE VIEW DocSpecialtyNULL AS
 SELECT FirstName, LastName, v.SpecialtyID
 FROM Person, (
@@ -179,6 +183,7 @@ WHERE v.PersonID=Person.PersonID;
 -- Definition of view `DocVicodin`
 -- shows First and Last name of Doctors who prescribed Vicodin
 --
+DROP VIEW IF EXISTS DocVicodin;
 CREATE VIEW DocVicodin AS
 SELECT FirstName, LastName
 FROM Person, Doctor, PatientVisit, PVisitPrescription
@@ -191,6 +196,7 @@ PrescriptionID="rx16908690034987";
 -- Definition of view `DocStevens`
 -- shows First, Last name, and phone number of Doctor Robert Steven's patients
 --
+DROP VIEW IF EXISTS DocStevens;
 CREATE VIEW DocStevens AS
 SELECT DISTINCT FirstName, LastName, Patient.PhoneNumber, Patient.PhoneNumExt
 FROM Person, PatientVisit, Patient
@@ -198,9 +204,31 @@ WHERE
 PatientVisit.DoctorID="RO1666613" AND
 PatientVisit.PatientID=Patient.PatientID AND
 Patient.PersonID=Person.PersonID;
+--
+-- Definition of procedure `PrescriptionFullerton`
+-- show the name of the prescription and prescription number of patients in the city of Fullerton
+--
+DROP PROCEDURE IF EXISTS PrescriptionFullerton;
+DELIMITER //
+CREATE PROCEDURE PrescriptionFullerton()
+BEGIN
+SELECT PrescriptionName, Prescription.PrescriptionID
+FROM Prescription
+RIGHT JOIN ( 
+SELECT PVisitPrescription.PrescriptionID
+FROM PVisitPrescription
+RIGHT JOIN PatientVisit
+ON PatientVisit.VisitID=PVisitPrescription.VisitID
+RIGHT JOIN Patient
+ON Patient.PatientID=PatientVisit.PatientID
+RIGHT JOIN Person
+ON Person.PersonID=Patient.PersonID
+WHERE City = "Fullerton" ) as v
+ON v.PrescriptionID=Prescription.PrescriptionID; 
+END;//
 
 -- Insert all records 
-INSERT INTO Person VALUES ('666666600','Bob','Bender','8794 Garfield', 'Chicago', 'IL','45321','7148657326',NULL);
+INSERT INTO Person VALUES ('666666600','Bob','Bender','8794 Garfield', 'Fullerton', 'IL','45321','7148657326',NULL);
 INSERT INTO Person VALUES ('333333300','Kim','Grace','6677 Mills Ave', 'Sacramento', 'CA','60078','3748372614',NULL);
 INSERT INTO Person VALUES ('888665555','James','Borg','450 Stone', 'Houston', 'TX','92867','3748372342',NULL);
 INSERT INTO Person VALUES ('444444400','Alex','Freed','4333 Pillsbury', 'Milwaukee', 'WI','72954','3748372019',NULL);
@@ -227,10 +255,10 @@ INSERT INTO Person VALUES ('444444401','Bonnie','Bays','111 Hollow', 'Milwaukee'
 INSERT INTO Person VALUES ('444444402','Alec','Best','233 Solid', 'Milwaukee', 'WI','72954','3743333456','123'); 
 INSERT INTO Person VALUES ('444444403','Sam','Snedden','987 Windy St', 'Milwaukee', 'WI','72954','7148123456','4567'); 
 INSERT INTO Person VALUES ('555555501','Nandita','Ball','222 Howard', 'Sacramento', 'CA','60078','7142132311','78'); 
-INSERT INTO Person VALUES ('666666601','Jill','Jarvis','6234 Lincoln', 'Chicago', 'IL','45321','3740293888','984'); 
-INSERT INTO Person VALUES ('666666602','Kate','King','1976 Boone Trace', 'Chicago', 'IL','45321','3748333333','094'); 
-INSERT INTO Person VALUES ('666666603','Lyle','Leslie','417 Hancock Ave', 'Chicago', 'IL','45321','3748444444','123'); 
-INSERT INTO Person VALUES ('666666604','Billie','King','556 Washington', 'Chicago', 'IL','45321','3748555555','674'); 
+INSERT INTO Person VALUES ('666666601','Jill','Jarvis','6234 Lincoln', 'Fullerton', 'IL','45321','3740293888','984'); 
+INSERT INTO Person VALUES ('666666602','Kate','King','1976 Boone Trace', 'Fullerton', 'IL','45321','3748333333','094'); 
+INSERT INTO Person VALUES ('666666603','Lyle','Leslie','417 Hancock Ave', 'Fullerton', 'IL','45321','3748444444','123'); 
+INSERT INTO Person VALUES ('666666604','Billie','King','556 Washington', 'Fullerton', 'IL','45321','3748555555','674'); 
 INSERT INTO Person VALUES ('666666605','Jon','Kramer','1988 Windy Creek', 'Seattle', 'WA','92740','3746948477',NULL);
 INSERT INTO Person VALUES ('666666606','Ray','King','213 Delk Road', 'Seattle', 'WA','92704','7140920004',NULL);
 INSERT INTO Person VALUES ('666666607','Gerald','Small','122 Ball Street','Dallas','TX','92869','7143353422',NULL); 
