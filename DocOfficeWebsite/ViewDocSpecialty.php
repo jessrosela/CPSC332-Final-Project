@@ -4,18 +4,17 @@
 <center>
 <?php
 
-$sql = "SELECT * FROM DocStevens";
+$sql = "SELECT * FROM DocSpecialty";
 $result = mysqli_query($conn,$sql);
 
 print "<pre>";
 print "<table border=1, cellpadding=15px>";
-print "<tr><td> First Name </td><td> Last Name </td><td> Specialty ID: </td>";
+print "<tr><td> First Name </td><td> Last Name </td><td> Specialty ID </td>";
 while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+
 {
 print "\n";
-print "<tr><td>$row[FirstName] </td><td> $row[LastName]  </td></td> $row[SpecialtyID]  </td></tr>";
-
-
+print "<tr><td> $row[FirstName] </td><td> $row[LastName] </td><td> $row[SpecialtyID] </td></tr>";
 }
 print "</table>";
 print "</pre>";
