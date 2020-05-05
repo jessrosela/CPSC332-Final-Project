@@ -8,7 +8,7 @@ $sql = "SELECT * FROM DocVicodin";
 $result = mysqli_query($conn,$sql);
 
 print "<pre>";
-print "<table border=1, cellpadding=15px>";
+print "<table border=1, cellpadding=15px, style=margin:10px 10px>";
 print "<tr><td>First Name </td><td> Last Name </td>";
 while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 {
