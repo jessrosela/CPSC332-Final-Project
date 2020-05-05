@@ -212,10 +212,10 @@ DROP PROCEDURE IF EXISTS PrescriptionFullerton;
 DELIMITER //
 CREATE PROCEDURE PrescriptionFullerton()
 BEGIN
-SELECT PrescriptionName, Prescription.PrescriptionID
+SELECT PrescriptionName, Prescription.PrescriptionID, v.PatientID, v.City
 FROM Prescription
 RIGHT JOIN ( 
-SELECT PVisitPrescription.PrescriptionID
+SELECT PVisitPrescription.PrescriptionID, Patient.PatientID, Person.City
 FROM PVisitPrescription
 RIGHT JOIN PatientVisit
 ON PatientVisit.VisitID=PVisitPrescription.VisitID
@@ -224,7 +224,8 @@ ON Patient.PatientID=PatientVisit.PatientID
 RIGHT JOIN Person
 ON Person.PersonID=Patient.PersonID
 WHERE City = "Fullerton" ) as v
-ON v.PrescriptionID=Prescription.PrescriptionID; 
+ON v.PrescriptionID=Prescription.PrescriptionID
+ORDER BY PrescriptionName asc; 
 END;//
 
 -- Insert all records 
