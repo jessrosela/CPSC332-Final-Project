@@ -26,8 +26,8 @@ echo "<br><br>Entered data successfully\n<br>";
 ?>
 
 <form action="<?php $_PHP_SELF ?>" method="post">
-<table width = "300" border = "0" cellspacing = "2" 
-                     cellpadding = "2" style="margin:10px 10px">
+<table width = "auto" border = "0" cellspacing = "2" 
+                     cellpadding = "2" style="margin:30px 10px">
                   
                      <tr>
                         <td width = "100">Doctor ID</td>

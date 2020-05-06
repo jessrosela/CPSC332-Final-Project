@@ -5,7 +5,7 @@
 <center>
 
 <form action="<?php $_PHP_SELF ?>" method="POST">
-<table width = "700" border = "0" cellspacing = "2" 
+<table width = "auto" border = "0" cellspacing = "2" 
                      cellpadding = "2" style="margin:30px 0px">
                   
                   <tr>
