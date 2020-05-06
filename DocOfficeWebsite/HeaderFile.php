@@ -16,6 +16,7 @@
 
 <div class="navbar">
 <a href="starter.php">Home</a>
+<a href="Patients.php">Patients</a>
 	<div class="dropdown">
   				<button class="dropbtn">Doctors</button>
  			 <div class="dropdown-content">
@@ -25,14 +26,6 @@
  			 </div>
 	</div>
 
-    <div class="dropdown">
-  				<button class="dropbtn">Patients</button>
- 			 <div class="dropdown-content">
-   					 <a href="PatientPrescription.php">Prescriptions</a>
-   					 <a href="PatientAppointment.php">Appointments</a>
-   					 <a href="PatientTest.php">Tests</a>
- 			 </div>
-	</div>
 </div>
 
 
