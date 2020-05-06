@@ -218,9 +218,43 @@ PatientVisit.DoctorID="RO1666613" AND
 PatientVisit.PatientID=Patient.PatientID AND
 Patient.PersonID=Person.PersonID;
 --
+-- Definition of view `PatientAppointment`
+-- shows Date, Time, VisitID, PatientID, and Doctor's Name
+-- of PatientVisits
+--
+DROP VIEW IF EXISTS PatientAppointment;
+CREATE VIEW PatientAppointment AS
+SELECT VisitID, PatientID, VisitDate, VisitTime, CONCAT_WS(" ",FirstName,LastName) AS DoctorName
+FROM PatientVisit, Doctor, Person
+WHERE Person.PersonID=Doctor.PersonID AND 
+Doctor.DoctorID=PatientVisit.DoctorID;
+--
+-- Definition of view `PatientPrescription`
+-- shows VisitDate, VisitID, PrescriptionID, PrescriptionName, and PatientID 
+-- of Patients
+--
+DROP VIEW IF EXISTS PatientPrescription;
+CREATE VIEW PatientPrescription AS
+SELECT VisitDate, PatientVisit.VisitID, PVisitPrescription.PrescriptionID, PrescriptionName, PatientID
+FROM PatientVisit, PVisitPrescription, Prescription
+WHERE PatientVisit.VisitID=PVisitPrescription.VisitID AND
+PVisitPrescription.PrescriptionID=Prescription.PrescriptionID;
+--
+-- Definition of view `PatientTest`
+-- shows the Visit Date, Visit ID, Test ID, Test Name, and Patient ID
+-- 
+DROP VIEW IF EXISTS PatientTest;
+CREATE VIEW PatientTest AS
+SELECT VisitDate, PatientVisit.VisitID, PVisitTest.TestID, TestName, PatientID
+FROM PatientVisit, PVisitTest, Test
+WHERE PatientVisit.VisitID=PVisitTest.VisitID AND
+PVisitTest.TestID=Test.TestID;
+--
 -- Definition of procedure `PrescriptionFullerton`
 -- show the name of the prescription and prescription number of patients in the city of Fullerton
 --
+
+
 DROP PROCEDURE IF EXISTS PrescriptionFullerton;
 DELIMITER //
 CREATE PROCEDURE PrescriptionFullerton()
