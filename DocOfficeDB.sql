@@ -28,12 +28,24 @@ CREATE TABLE Person (
 --
 DROP TABLE IF EXISTS Doctor;
 CREATE TABLE Doctor (
-  DoctorID	varchar(9),
+  DoctorID	varchar(9) DEFAULT 1,
   MedicalDegrees	char(50),
   PersonID varchar(9),
   PRIMARY KEY (DoctorID),
   FOREIGN KEY (PersonID) references Person(PersonID)
 );
+--
+-- Definition of trigger `Trig_DoctorID`
+-- creates a new doctor ID before one is inserted by 
+-- concatenating the first two characters of the first name and 
+-- the last 7 characters of the person ID
+DROP TRIGGER IF EXISTS TRIG_DoctorID;
+CREATE TRIGGER TRIG_DoctorID
+BEFORE INSERT ON Doctor 
+FOR EACH ROW
+    SET NEW.DoctorID=(SELECT CONCAT (UPPER(LEFT(FirstName, 2)),RIGHT(PersonID, 7))
+    FROM Person
+    WHERE PersonID=NEW.PersonID);
 --
 -- Definition of table `Specialty`
 --
@@ -41,7 +53,8 @@ DROP TABLE IF EXISTS Specialty;
 CREATE TABLE Specialty (
   SpecialtyID	varchar(9),
   SpecialtyName	varchar(50),
-  PRIMARY KEY (SpecialtyID)
+  PRIMARY KEY (SpecialtyID),
+  KEY SpecialtyID (SpecialtyID)
 );
 --
 -- Definition of table `DoctorSpecialty`
