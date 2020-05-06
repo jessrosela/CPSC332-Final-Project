@@ -4,7 +4,7 @@
 <center>
 <?php
 
-$sql = "SELECT * FROM DocVicodin";
+$sql = "SELECT * FROM DocVicodin ORDER BY FirstName";
 $result = mysqli_query($conn,$sql);
 
 print "<pre>";

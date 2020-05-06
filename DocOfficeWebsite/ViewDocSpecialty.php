@@ -2,7 +2,7 @@
 <?php include 'ConnectionData.php';?>
 
 
-<body>
+
 <?php
 if(isset($_POST['add'])) {
 if(! get_magic_quotes_gpc() ) {
@@ -49,15 +49,13 @@ echo "<br><br>Entered data successfully\n<br>";
                </form>
 
 
-</body>
-
-
-
 
 <center>
+
+
 <?php
 
-$sql = "SELECT * FROM DocSpecialty";
+$sql = "SELECT * FROM DocSpecialty ORDER BY FirstName asc";
 $result = mysqli_query($conn,$sql);
 
 print "<pre>";
@@ -74,4 +72,5 @@ print "</pre>";
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
+
 </center>

@@ -9,8 +9,7 @@
 <head>
 <h1><center> Welcome to CPSC 332 </center> </h1>
 <hr><b><center>A Doctor's Office Website</center></hr>
-<hr>
-<center> by Matthew Farah and Jesse Smith</center></b></hr>
+<hr><center> by Matthew Farah and Jesse Smith</center></b></hr>
 </p></b>
 </head>
 
@@ -19,11 +18,23 @@
 
 <table id="t01">
 	<tr><img class = "one" src="england.jpg" alt="View of London" style="width:100%"/>
-  		<th><a href="ViewDocSpecialty.php">Doctors and Their Specialties</a>
-  		</th>
-   		 <th><a href="ViewDocStevens.php">Patients of Doctor Robert Stevens</a>
-    	</th>
-    	<th><a href="ViewDocVicodin.php">Doctors Who've Prescribed Vicodin</a>
+  		<th><div class="dropup">
+  				<button class="dropbtn">Doctors</button>
+ 			 <div class="dropup-content">
+   					 <a href="ViewDocSpecialty.php">Specialties</a>
+   					 <a href="ViewDocStevens.php">Patients of Dr. Robert Stevens</a>
+   					 <a href="ViewDocVicodin.php">List Prescribing Vicodin</a>
+ 			 </div>
+			</div>
+
+    	<th><div class="dropup">
+  				<button class="dropbtn">Patients</button>
+ 			 <div class="dropup-content">
+   					 <a href="PatientPrescription.php">Prescriptions</a>
+   					 <a href="PatientAppointment.php">Appointments</a>
+   					 <a href="PatientTest.php">Tests</a>
+ 			 </div>
+			</div>
 		</th>
 		<th><a href="starter.php">Home</a>
 		</th>
@@ -32,3 +43,4 @@
 
 </body>
 </html>
+
