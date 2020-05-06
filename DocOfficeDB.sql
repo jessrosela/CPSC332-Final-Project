@@ -214,7 +214,7 @@ CREATE VIEW DocStevens AS
 SELECT DISTINCT FirstName, LastName, Patient.PhoneNumber, Patient.PhoneNumExt
 FROM Person, PatientVisit, Patient
 WHERE 
-PatientVisit.DoctorID="RO1666613" AND
+PatientVisit.DoctorID="RO6666613" AND
 PatientVisit.PatientID=Patient.PatientID AND
 Patient.PersonID=Person.PersonID;
 --
@@ -245,7 +245,7 @@ PVisitPrescription.PrescriptionID=Prescription.PrescriptionID;
 -- 
 DROP VIEW IF EXISTS PatientTest;
 CREATE VIEW PatientTest AS
-SELECT VisitDate, PatientVisit.VisitID, PVisitTest.TestID, TestName, PatientID
+SELECT PatientVisit.VisitID, PatientID, VisitDate, PVisitTest.TestID, TestName
 FROM PatientVisit, PVisitTest, Test
 WHERE PatientVisit.VisitID=PVisitTest.VisitID AND
 PVisitTest.TestID=Test.TestID;
@@ -317,14 +317,14 @@ INSERT INTO Person VALUES ('666666611','Carl','Reedy','213 Ball St','Philadelphi
 INSERT INTO Person VALUES ('666666612','Sammy','Hall','433 Main Street','Miami', 'FL','41390','3746655658',NULL); 
 INSERT INTO Person VALUES ('666666613','Robert','Stevens','196 Elm Street','Miami', 'FL','41390','3749494837',NULL); 
 
-INSERT INTO Doctor VALUES ('FR5847226','MD, MM','333445555');
-INSERT INTO Doctor VALUES ('JE1029384','MD, MS, DS','987654321');
-INSERT INTO Doctor VALUES ('JA9584732','MD, DS, DCM','888665555');
-INSERT INTO Doctor VALUES ('JA6748392','MD, DO','111111100');
-INSERT INTO Doctor VALUES ('AL0987736','MD, MCM','444444400');
-INSERT INTO Doctor VALUES ('JO3459681','MD','555555500');
-INSERT INTO Doctor VALUES ('SA6699912','MD, DS','666666612'); 
-INSERT INTO Doctor VALUES ('RO1666613','MD, DCM','666666613'); 
+INSERT INTO Doctor (MedicalDegrees, PersonID) VALUES ('MD, MM','333445555');
+INSERT INTO Doctor (MedicalDegrees, PersonID) VALUES ('MD, MS, DS','987654321');
+INSERT INTO Doctor (MedicalDegrees, PersonID) VALUES ('MD, DS, DCM','888665555');
+INSERT INTO Doctor (MedicalDegrees, PersonID) VALUES ('MD, DO','111111100');
+INSERT INTO Doctor (MedicalDegrees, PersonID) VALUES ('MD, MCM','444444400');
+INSERT INTO Doctor (MedicalDegrees, PersonID) VALUES ('MD','555555500');
+INSERT INTO Doctor (MedicalDegrees, PersonID) VALUES ('MD, DS','666666612'); 
+INSERT INTO Doctor (MedicalDegrees, PersonID) VALUES ('MD, DCM','666666613'); 
 
 INSERT INTO Specialty VALUES ('CLI00','Clinical Medicine');
 INSERT INTO Specialty VALUES ('FAM00','Family Medicine');
@@ -332,12 +332,12 @@ INSERT INTO Specialty VALUES ('OST00','Osteopathic Medicine');
 INSERT INTO Specialty VALUES ('SUR00','Surgery');
 
 
-INSERT INTO DoctorSpecialty VALUES ('JA9584732','SUR00');
-INSERT INTO DoctorSpecialty VALUES ('JA6748392','OST00');
-INSERT INTO DoctorSpecialty VALUES ('AL0987736','CLI00');
-INSERT INTO DoctorSpecialty VALUES ('JO3459681','FAM00');
-INSERT INTO DoctorSpecialty VALUES ('SA6699912','SUR00'); 
-INSERT INTO DoctorSpecialty VALUES ('RO1666613','FAM00'); 
+INSERT INTO DoctorSpecialty VALUES ('JA8665555','SUR00');
+INSERT INTO DoctorSpecialty VALUES ('JA1111100','OST00');
+INSERT INTO DoctorSpecialty VALUES ('AL4444400','CLI00');
+INSERT INTO DoctorSpecialty VALUES ('JO5555500','FAM00');
+INSERT INTO DoctorSpecialty VALUES ('SA6666612','SUR00'); 
+INSERT INTO DoctorSpecialty VALUES ('RO6666613','FAM00'); 
 
 INSERT INTO Patient VALUES ('PA666600','7148657326',NULL,'1968-04-17','666666600');
 INSERT INTO Patient VALUES ('PA333300','3748372614',NULL,'1970-10-23','333333300'); 
@@ -381,46 +381,46 @@ INSERT INTO Patient VALUES ('PA666612','3746655658',NULL,'1970-01-11','666666612
 INSERT INTO Patient VALUES ('PA666613','3749494837',NULL,'1980-05-21','666666613'); 
 
 
-INSERT INTO PatientVisit VALUES ('PV0000001','PA666600','FR5847226','2019-01-01','09:00:00','trouble breathing, feeling depressed because of quarantine loneliness, difficulty breathing may be anxiety induced, no apparent abnormalities present when listening to breathing with stethoscope');
-INSERT INTO PatientVisit VALUES ('PV0000002','PA456789','JA6748392','2019-01-01','09:20:00','shoulder pain'); 
-INSERT INTO PatientVisit VALUES ('PV0000003','PA333300','FR5847226','2019-01-01','10:15:00','minor skin lesion on ankle'); 
-INSERT INTO PatientVisit VALUES ('PV0000004','PA111101','AL0987736','2019-01-01','11:00:00','temporary loss of vision in right eye due to bar fight, patient possible suffering from alcoholism, will review symptoms in future appointments before notifying patient to seek treatment'); 
-INSERT INTO PatientVisit VALUES ('PV0000005','PA665555','FR5847226','2019-01-01','11:30:00','tingling feeling in hands due to onset of diabetic neuropathy referred patient to endocrinalogist'); 
-INSERT INTO PatientVisit VALUES ('PV0000006','PA654321','JA6748392','2019-01-01','11:45:00','arthritis in knees'); 
-INSERT INTO PatientVisit VALUES ('PV0000007','PA887777','JA6748392','2019-01-01','13:30:00','lower back pain'); 
-INSERT INTO PatientVisit VALUES ('PV0000008','PA444402','RO1666613','2019-01-01','14:30:00','posibble type two diabetic, patient obese'); 
-INSERT INTO PatientVisit VALUES ('PV0000009','PA666608','JO3459681','2019-01-01','15:00:00','possible malignant tumor in abdomen, referred to oncologist'); 
-INSERT INTO PatientVisit VALUES ('PV0000010','PA453453','AL0987736','2019-01-02','10:10:00','yearly physical, all clear'); 
-INSERT INTO PatientVisit VALUES ('PV0000011','PA445555','JA6748392','2019-01-02','10:20:00','uncomplicated neck pain'); 
-INSERT INTO PatientVisit VALUES ('PV0000012','PA444400','FR5847226','2019-01-02','12:00:00','possible exposure to radiation, diarrhea, vomiting, dizziness, headache'); 
-INSERT INTO PatientVisit VALUES ('PV0000013','PA987987','AL0987736','2019-01-02','13:00:00','yearly physical, all clear'); 
-INSERT INTO PatientVisit VALUES ('PV0000014','PA222200','FR5847226','2019-01-02','13:15:00','possible concussion diarrhea, vomiting, dizziness, headache'); 
-INSERT INTO PatientVisit VALUES ('PV0000015','PA222203','JA6748392','2019-01-02','13:30:00','tennis elbow'); 
-INSERT INTO PatientVisit VALUES ('PV0000016','PA111100','FR5847226','2019-01-02','14:20:00','minor head wound from skate boarding, advised patient to wear protective gear'); 
-INSERT INTO PatientVisit VALUES ('PV0000017','PA555500','FR5847226','2019-01-03','09:45:00','difficulty hearing in left ear'); 
-INSERT INTO PatientVisit VALUES ('PV0000018','PA222202','FR5847226','2019-01-03','10:50:00','yearly physical, all clear'); 
-INSERT INTO PatientVisit VALUES ('PV0000019','PA111103','FR5847226','2019-01-03','12:30:00','yearly physical, all clear'); 
-INSERT INTO PatientVisit VALUES ('PV0000020','PA884444','AL0987736','2019-01-03','17:15:00','trouble breathing, difficulty breathing may be anxiety induced, no apparent abnormalities present when listening to breathing with stethoscope'); 
-INSERT INTO PatientVisit VALUES ('PV0000021','PA222201','FR5847226','2019-01-04','09:30:00','minor skin lesion on underside of hands and knees due to skateboarding accident'); 
-INSERT INTO PatientVisit VALUES ('PV0000022','PA444403','RO1666613','2019-01-04','11:20:00','patient suffering with asthma due to the changing of the seasons'); 
-INSERT INTO PatientVisit VALUES ('PV0000023','PA111102','FR5847226','2019-01-04','14:00:00','workers comp exam, patient experiencing severe muscle pain in lower back'); 
-INSERT INTO PatientVisit VALUES ('PV0000024','PA222204','JE1029384','2019-01-04','15:45:00','Appendectomy'); 
-INSERT INTO PatientVisit VALUES ('PV0000025','PA666607','SA6699912','2019-01-07','14:30:00','performed cataract surgery, went well'); 
-INSERT INTO PatientVisit VALUES ('PV0000026','PA666609','JO3459681','2019-01-09','13:00:00','difficulty breathing and major headaches, treated for asthma'); 
-INSERT INTO PatientVisit VALUES ('PV0000027','PA666603','SA6699912','2019-01-12','15:20:00','performed a cholecystectomy due to cancer'); 
-INSERT INTO PatientVisit VALUES ('PV0000028','PA666610','JO3459681','2019-01-12','16:00:00','minor lesion on calf from sports related accident'); 
-INSERT INTO PatientVisit VALUES ('PV0000029','PA666611','JO3459681','2019-01-13','13:30:00','yearly physical, all clear'); 
-INSERT INTO PatientVisit VALUES ('PV0000030','PA444401','JE1029384','2019-01-14','09:15:00','Appendectomy'); 
-INSERT INTO PatientVisit VALUES ('PV0000031','PA666612','JA9584732','2019-01-14','11:20:00','FREE SKIN GRAFT, TOTAL TIME: 1 HR'); 
-INSERT INTO PatientVisit VALUES ('PV0000032','PA222205','JE1029384','2019-01-15','11:00:00','Breast biopsy, two lumps on right chest'); 
-INSERT INTO PatientVisit VALUES ('PV0000033','PA555501','RO1666613','2019-01-15','12:00:00','stroke treatment, referred to speech therapist'); 
-INSERT INTO PatientVisit VALUES ('PV0000034','PA666601','RO1666613','2019-01-18','12:50:00','yearly physical, all clear'); 
-INSERT INTO PatientVisit VALUES ('PV0000035','PA666613','JA9584732','2019-01-20','12:50:00','DEBRIDEMENT OF WOUND, TOTAL TIME: 1 HR'); 
-INSERT INTO PatientVisit VALUES ('PV0000036','PA666604','SA6699912','2019-01-23','08:10:00','perormed extensive cataract surgery, went very well, patient likely to have total vision restored'); 
-INSERT INTO PatientVisit VALUES ('PV0000037','PA666602','RO1666613','2019-01-23','13:30:00','yearly physical, possible cancerous growth detected, referred to oncologist'); 
-INSERT INTO PatientVisit VALUES ('PV0000038','PA666605','SA6699912','2019-01-24','11:50:00','performed an appendectomy, high chance of infection, patient left against advisement and removed bandages early'); 
-INSERT INTO PatientVisit VALUES ('PV0000039','PA666606','SA6699912','2019-01-25','09:45:00','performed an appendectomy, patient stayed in the hospital the entire recommended time (unlike yesterdays patient), should heal completely'); 
-INSERT INTO PatientVisit VALUES ('PV0000040','PA333301','JE1029384','2019-01-26','09:00:00','Debridement of wound'); 
+INSERT INTO PatientVisit VALUES ('PV0000001','PA666600','FR3445555','2019-01-01','09:00:00','trouble breathing, feeling depressed because of quarantine loneliness, difficulty breathing may be anxiety induced, no apparent abnormalities present when listening to breathing with stethoscope');
+INSERT INTO PatientVisit VALUES ('PV0000002','PA456789','JA1111100','2019-01-01','09:20:00','shoulder pain'); 
+INSERT INTO PatientVisit VALUES ('PV0000003','PA333300','FR3445555','2019-01-01','10:15:00','minor skin lesion on ankle'); 
+INSERT INTO PatientVisit VALUES ('PV0000004','PA111101','AL4444400','2019-01-01','11:00:00','temporary loss of vision in right eye due to bar fight, patient possible suffering from alcoholism, will review symptoms in future appointments before notifying patient to seek treatment'); 
+INSERT INTO PatientVisit VALUES ('PV0000005','PA665555','FR3445555','2019-01-01','11:30:00','tingling feeling in hands due to onset of diabetic neuropathy referred patient to endocrinalogist'); 
+INSERT INTO PatientVisit VALUES ('PV0000006','PA654321','JA1111100','2019-01-01','11:45:00','arthritis in knees'); 
+INSERT INTO PatientVisit VALUES ('PV0000007','PA887777','JA1111100','2019-01-01','13:30:00','lower back pain'); 
+INSERT INTO PatientVisit VALUES ('PV0000008','PA444402','RO6666613','2019-01-01','14:30:00','posibble type two diabetic, patient obese'); 
+INSERT INTO PatientVisit VALUES ('PV0000009','PA666608','JO5555500','2019-01-01','15:00:00','possible malignant tumor in abdomen, referred to oncologist'); 
+INSERT INTO PatientVisit VALUES ('PV0000010','PA453453','AL4444400','2019-01-02','10:10:00','yearly physical, all clear'); 
+INSERT INTO PatientVisit VALUES ('PV0000011','PA445555','JA1111100','2019-01-02','10:20:00','uncomplicated neck pain'); 
+INSERT INTO PatientVisit VALUES ('PV0000012','PA444400','FR3445555','2019-01-02','12:00:00','possible exposure to radiation, diarrhea, vomiting, dizziness, headache'); 
+INSERT INTO PatientVisit VALUES ('PV0000013','PA987987','AL4444400','2019-01-02','13:00:00','yearly physical, all clear'); 
+INSERT INTO PatientVisit VALUES ('PV0000014','PA222200','FR3445555','2019-01-02','13:15:00','possible concussion diarrhea, vomiting, dizziness, headache'); 
+INSERT INTO PatientVisit VALUES ('PV0000015','PA222203','JA1111100','2019-01-02','13:30:00','tennis elbow'); 
+INSERT INTO PatientVisit VALUES ('PV0000016','PA111100','FR3445555','2019-01-02','14:20:00','minor head wound from skate boarding, advised patient to wear protective gear'); 
+INSERT INTO PatientVisit VALUES ('PV0000017','PA555500','FR3445555','2019-01-03','09:45:00','difficulty hearing in left ear'); 
+INSERT INTO PatientVisit VALUES ('PV0000018','PA222202','FR3445555','2019-01-03','10:50:00','yearly physical, all clear'); 
+INSERT INTO PatientVisit VALUES ('PV0000019','PA111103','FR3445555','2019-01-03','12:30:00','yearly physical, all clear'); 
+INSERT INTO PatientVisit VALUES ('PV0000020','PA884444','AL4444400','2019-01-03','17:15:00','trouble breathing, difficulty breathing may be anxiety induced, no apparent abnormalities present when listening to breathing with stethoscope'); 
+INSERT INTO PatientVisit VALUES ('PV0000021','PA222201','FR3445555','2019-01-04','09:30:00','minor skin lesion on underside of hands and knees due to skateboarding accident'); 
+INSERT INTO PatientVisit VALUES ('PV0000022','PA444403','RO6666613','2019-01-04','11:20:00','patient suffering with asthma due to the changing of the seasons'); 
+INSERT INTO PatientVisit VALUES ('PV0000023','PA111102','FR3445555','2019-01-04','14:00:00','workers comp exam, patient experiencing severe muscle pain in lower back'); 
+INSERT INTO PatientVisit VALUES ('PV0000024','PA222204','JE7654321','2019-01-04','15:45:00','Appendectomy'); 
+INSERT INTO PatientVisit VALUES ('PV0000025','PA666607','SA6666612','2019-01-07','14:30:00','performed cataract surgery, went well'); 
+INSERT INTO PatientVisit VALUES ('PV0000026','PA666609','JO5555500','2019-01-09','13:00:00','difficulty breathing and major headaches, treated for asthma'); 
+INSERT INTO PatientVisit VALUES ('PV0000027','PA666603','SA6666612','2019-01-12','15:20:00','performed a cholecystectomy due to cancer'); 
+INSERT INTO PatientVisit VALUES ('PV0000028','PA666610','JO5555500','2019-01-12','16:00:00','minor lesion on calf from sports related accident'); 
+INSERT INTO PatientVisit VALUES ('PV0000029','PA666611','JO5555500','2019-01-13','13:30:00','yearly physical, all clear'); 
+INSERT INTO PatientVisit VALUES ('PV0000030','PA444401','JE7654321','2019-01-14','09:15:00','Appendectomy'); 
+INSERT INTO PatientVisit VALUES ('PV0000031','PA666612','JA8665555','2019-01-14','11:20:00','FREE SKIN GRAFT, TOTAL TIME: 1 HR'); 
+INSERT INTO PatientVisit VALUES ('PV0000032','PA222205','JE7654321','2019-01-15','11:00:00','Breast biopsy, two lumps on right chest'); 
+INSERT INTO PatientVisit VALUES ('PV0000033','PA555501','RO6666613','2019-01-15','12:00:00','stroke treatment, referred to speech therapist'); 
+INSERT INTO PatientVisit VALUES ('PV0000034','PA666601','RO6666613','2019-01-18','12:50:00','yearly physical, all clear'); 
+INSERT INTO PatientVisit VALUES ('PV0000035','PA666613','JA8665555','2019-01-20','12:50:00','DEBRIDEMENT OF WOUND, TOTAL TIME: 1 HR'); 
+INSERT INTO PatientVisit VALUES ('PV0000036','PA666604','SA6666612','2019-01-23','08:10:00','perormed extensive cataract surgery, went very well, patient likely to have total vision restored'); 
+INSERT INTO PatientVisit VALUES ('PV0000037','PA666602','RO6666613','2019-01-23','13:30:00','yearly physical, possible cancerous growth detected, referred to oncologist'); 
+INSERT INTO PatientVisit VALUES ('PV0000038','PA666605','SA6666612','2019-01-24','11:50:00','performed an appendectomy, high chance of infection, patient left against advisement and removed bandages early'); 
+INSERT INTO PatientVisit VALUES ('PV0000039','PA666606','SA6666612','2019-01-25','09:45:00','performed an appendectomy, patient stayed in the hospital the entire recommended time (unlike yesterdays patient), should heal completely'); 
+INSERT INTO PatientVisit VALUES ('PV0000040','PA333301','JE7654321','2019-01-26','09:00:00','Debridement of wound'); 
 
 INSERT INTO Test VALUES ('AH000','Adrenocorticotropic Hormone'); 
 INSERT INTO Test VALUES ('ABG00','Arterial Blood Gases'); 
